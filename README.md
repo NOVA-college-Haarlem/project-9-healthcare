@@ -1,4 +1,3 @@
-# project-9-healthcare
 # Healthcare Management System
 
 ## Project Overview
