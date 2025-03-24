@@ -1,4 +1,4 @@
-# Healthcare Management System - User Stories
+# Healthcare Management System
 
 ## Project Overview
 
