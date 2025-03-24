@@ -283,3 +283,445 @@ This Laravel project provides a Healthcare Management System with three existing
 - I can compare performance against benchmarks
 - I can identify trends in patient satisfaction
 - I can generate quality improvement reports
+
+## ERD
+
+```mermaid
+erDiagram
+    User ||--o{ Patient : "can be"
+    User ||--o{ Doctor : "can be"
+    User ||--o{ Staff : "can be"
+    
+    Patient ||--o{ Appointment : "schedules"
+    Doctor ||--o{ Appointment : "manages"
+    Appointment ||--|| AppointmentStatus : "has"
+    
+    Patient ||--o{ MedicalRecord : "has"
+    Doctor ||--o{ MedicalRecord : "creates"
+    MedicalRecord ||--o{ Document : "contains"
+    
+    Doctor ||--o{ Prescription : "creates"
+    Patient ||--o{ Prescription : "receives"
+    Prescription ||--o{ Medication : "includes"
+    
+    Patient ||--o{ Bill : "receives"
+    Appointment ||--o{ Bill : "generates"
+    Bill ||--o{ PaymentTransaction : "has"
+    Patient ||--o{ Insurance : "submits"
+    Insurance ||--o{ Bill : "covers"
+    
+    Patient ||--o{ LabResult : "has"
+    Doctor ||--o{ LabResult : "orders"
+    LabTechnician ||--o{ LabResult : "processes"
+    Staff ||--|| LabTechnician : "is a"
+    
+    Staff ||--o{ Schedule : "has"
+    Department ||--o{ Staff : "employs"
+    
+    Doctor ||--o{ VirtualConsultation : "conducts"
+    Patient ||--o{ VirtualConsultation : "attends"
+    VirtualConsultation ||--|| Appointment : "is a"
+    
+    InventoryManager ||--o{ InventoryItem : "manages"
+    Staff ||--|| InventoryManager : "is a"
+    Staff ||--o{ SupplyRequest : "submits"
+    InventoryItem ||--o{ SupplyRequest : "fulfills"
+    
+    Doctor ||--o{ Referral : "creates"
+    Patient ||--o{ Referral : "receives"
+    Specialist ||--o{ Referral : "receives"
+    Doctor ||--|| Specialist : "can be"
+    
+    Doctor ||--o{ TreatmentPlan : "creates"
+    Patient ||--o{ TreatmentPlan : "follows"
+    
+    Administrator ||--o{ EmergencyNotification : "sends"
+    Staff ||--|| Administrator : "is a"
+    Staff ||--o{ EmergencyNotification : "receives"
+    
+    Doctor ||--o{ EducationalMaterial : "assigns"
+    Patient ||--o{ EducationalMaterial : "views"
+    
+    Patient ||--o{ Vaccination : "receives"
+    Doctor ||--o{ Vaccination : "administers"
+    
+    EquipmentManager ||--o{ MedicalEquipment : "manages"
+    Staff ||--|| EquipmentManager : "is a"
+    Staff ||--o{ EquipmentReservation : "makes"
+    MedicalEquipment ||--o{ EquipmentReservation : "has"
+    
+    Patient ||--|| PatientPortal : "uses"
+    Administrator ||--o{ PatientPortal : "manages"
+    
+    FrontDeskStaff ||--o{ CheckIn : "processes"
+    Staff ||--|| FrontDeskStaff : "is a"
+    Patient ||--o{ CheckIn : "performs"
+    Appointment ||--|| CheckIn : "requires"
+    
+    Patient ||--o{ HealthMetric : "tracks"
+    Doctor ||--o{ HealthMetric : "reviews"
+    
+    Patient ||--o{ Allergy : "reports"
+    Doctor ||--o{ MedicationAlert : "receives"
+    Prescription ||--o{ MedicationAlert : "triggers"
+    Allergy ||--o{ MedicationAlert : "triggers"
+    
+    Administrator ||--o{ AnalyticsReport : "generates"
+    QualityImprovementOfficer ||--o{ AnalyticsReport : "reviews"
+    Staff ||--|| QualityImprovementOfficer : "is a"
+    
+    User {
+        int id PK
+        string name
+        string email
+        string password
+        string user_type
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Patient {
+        int id PK
+        int user_id FK
+        date date_of_birth
+        string gender
+        string address
+        string phone
+        string emergency_contact
+        string blood_type
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Doctor {
+        int id PK
+        int user_id FK
+        string specialization
+        string license_number
+        string department
+        string phone
+        text bio
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Staff {
+        int id PK
+        int user_id FK
+        string position
+        string department
+        string employee_id
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Appointment {
+        int id PK
+        int patient_id FK
+        int doctor_id FK
+        datetime scheduled_time
+        string reason
+        int status_id FK
+        text notes
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    AppointmentStatus {
+        int id PK
+        string name
+        string description
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    MedicalRecord {
+        int id PK
+        int patient_id FK
+        int doctor_id FK
+        date visit_date
+        text diagnosis
+        text treatment
+        text notes
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Document {
+        int id PK
+        int medical_record_id FK
+        string type
+        string title
+        string file_path
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Prescription {
+        int id PK
+        int doctor_id FK
+        int patient_id FK
+        date issue_date
+        date expiry_date
+        text notes
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Medication {
+        int id PK
+        int prescription_id FK
+        string name
+        string dosage
+        string frequency
+        string duration
+        int refills
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Bill {
+        int id PK
+        int patient_id FK
+        int appointment_id FK
+        decimal amount
+        string status
+        date due_date
+        int insurance_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    PaymentTransaction {
+        int id PK
+        int bill_id FK
+        decimal amount
+        date payment_date
+        string payment_method
+        string transaction_id
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Insurance {
+        int id PK
+        int patient_id FK
+        string provider
+        string policy_number
+        date start_date
+        date end_date
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    LabResult {
+        int id PK
+        int patient_id FK
+        int doctor_id FK
+        int lab_technician_id FK
+        string test_name
+        date test_date
+        text result
+        boolean abnormal
+        text interpretation
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Schedule {
+        int id PK
+        int staff_id FK
+        datetime start_time
+        datetime end_time
+        string shift_type
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Department {
+        int id PK
+        string name
+        string location
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    VirtualConsultation {
+        int id PK
+        int appointment_id FK
+        string meeting_link
+        datetime start_time
+        datetime end_time
+        text notes
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    InventoryItem {
+        int id PK
+        string name
+        string category
+        int quantity
+        string location
+        int threshold
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    SupplyRequest {
+        int id PK
+        int staff_id FK
+        int item_id FK
+        int quantity
+        string status
+        text reason
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Referral {
+        int id PK
+        int doctor_id FK
+        int patient_id FK
+        int specialist_id FK
+        date referral_date
+        text reason
+        string status
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    TreatmentPlan {
+        int id PK
+        int doctor_id FK
+        int patient_id FK
+        date start_date
+        date end_date
+        text goals
+        text activities
+        text medications
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    EmergencyNotification {
+        int id PK
+        int sender_id FK
+        string type
+        text message
+        string target_department
+        datetime sent_at
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    EducationalMaterial {
+        int id PK
+        string title
+        string content_type
+        string file_path
+        text description
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Vaccination {
+        int id PK
+        int patient_id FK
+        int doctor_id FK
+        string vaccine_name
+        date administration_date
+        string lot_number
+        date next_dose_date
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    MedicalEquipment {
+        int id PK
+        string name
+        string type
+        string serial_number
+        date purchase_date
+        date last_maintenance
+        date next_maintenance
+        string status
+        string location
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    EquipmentReservation {
+        int id PK
+        int staff_id FK
+        int equipment_id FK
+        datetime start_time
+        datetime end_time
+        string purpose
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    PatientPortal {
+        int id PK
+        int patient_id FK
+        boolean active
+        datetime last_login
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    CheckIn {
+        int id PK
+        int patient_id FK
+        int appointment_id FK
+        datetime check_in_time
+        datetime check_out_time
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    HealthMetric {
+        int id PK
+        int patient_id FK
+        string metric_type
+        decimal value
+        string unit
+        datetime recorded_at
+        text notes
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    Allergy {
+        int id PK
+        int patient_id FK
+        string allergen
+        string reaction
+        string severity
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    MedicationAlert {
+        int id PK
+        int doctor_id FK
+        int prescription_id FK
+        int allergy_id FK
+        string alert_type
+        text message
+        boolean acknowledged
+        timestamp created_at
+        timestamp updated_at
+    }
+    
+    AnalyticsReport {
+        int id PK
+        int creator_id FK
+        string report_type
+        json data
+        date report_date
+        timestamp created_at
+        timestamp updated_at
+    }
+```
