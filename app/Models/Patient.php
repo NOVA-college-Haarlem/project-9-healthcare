@@ -50,5 +50,8 @@ class Patient extends Model
     {
         return $this->hasMany(LabResult::class);
     }
-
+    public function vaccinations()
+    {
+        return $this->hasMany(Vaccination::class);
+    }
 }
