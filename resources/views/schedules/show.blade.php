@@ -1,8 +1,8 @@
-{{-- <x-base> --}}
+<x-base>
     <div class="container">
         <h1>Schedule Details</h1>
         <a href="{{ route('schedules.index') }}" style="width: 150px;">Back to Schedules</a>
-        <table style="width: 100%; margin: 0 auto;">
+        <table class="table table-bordered" style="width: 100%; margin: 0 auto;">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -30,7 +30,7 @@
             </tbody>
         </table>
     </div>
-{{-- </x-base> --}}
+</x-base>
 
 <script>
     function confirmDelete() {
