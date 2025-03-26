@@ -13,9 +13,11 @@ return new class extends Migration
             $table->foreignId('patient_id')->constrained();
             $table->foreignId('doctor_id')->constrained();
             $table->dateTime('scheduled_time');
+           
             $table->string('reason');
             $table->foreignId('status_id')->constrained('appointment_statuses');
-            $table->text('notes')->nullable();
+            $table->text('notes')->nullable(); // For additional notes
+            $table->enum('confirmation_status', ['pending', 'confirmed', 'cancelled'])->default('pending'); // For confirmation
             $table->timestamps();
             $table->softDeletes();
         });
