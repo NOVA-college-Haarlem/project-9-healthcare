@@ -8,10 +8,10 @@ class Schedule extends Model
 {
 
     protected $fillable = [
-        'staff_id',
+        'date',
         'start_time',
         'end_time',
-        'shift_type'
+        'staff_id'
     ];
 
     public function staff()
