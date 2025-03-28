@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\Department;
 use App\Http\Requests\ScheduleRequest;
 use Illuminate\Http\Request;
 
@@ -11,13 +12,14 @@ class ScheduleController extends Controller
     public function index()
     {
         $schedules = Schedule::all();
-        return view('schedules.index', compact('schedules'));
+        $departments = Department::all();
+        return view('schedules.index', compact('schedules', 'departments'));
     }
 
     public function create()
     {
-        $schedules = Schedule::all();
-        return view('schedules.create', compact('schedules'));
+        $departments = Department::all();
+        return view('schedules.create', compact('departments'));
     }
 
     public function store(ScheduleRequest $request)
@@ -36,7 +38,8 @@ class ScheduleController extends Controller
     public function edit(string $id)
     {
         $schedule = Schedule::findOrFail($id);
-        return view('schedules.edit', compact('schedule'));
+        $departments = Department::all();
+        return view('schedules.edit', compact('schedule', 'departments'));
     }
 
     public function update(ScheduleRequest $request, string $id)
@@ -58,6 +61,7 @@ class ScheduleController extends Controller
         $schedule->date           = $request->date;
         $schedule->start_time     = $request->start_time;
         $schedule->end_time       = $request->end_time;
+        $schedule->department_id  = $request->department_id;
         $schedule->save();
     }
 }

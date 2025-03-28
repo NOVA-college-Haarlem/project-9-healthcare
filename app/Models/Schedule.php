@@ -18,4 +18,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(Staff::class);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }
