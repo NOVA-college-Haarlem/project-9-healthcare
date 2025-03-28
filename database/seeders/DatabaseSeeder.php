@@ -15,11 +15,19 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+
+        $this->call([
+            DepartmentSeeder::class,
+            DoctorSeeder::class,
+            PatientSeeder::class,
+            AppointmentStatusSeeder::class,
+            AppointmentSeeder::class,
+        ]);
         // Eerst departments aanmaken
-        
+
 
         // Artsen aanmaken
-        
+
 
         // Patiënten met vaccinaties
 
