@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\VaccinationController;
@@ -49,5 +50,19 @@ Route::prefix('vaccinations')->group(function () {
     Route::get('/patient/{patient}/schedule',    [VaccinationController::class, 'upcomingVaccines'])->name('vaccinations.patient.schedule');
     Route::get('/patient/{patient}/certificate', [VaccinationController::class, 'showCertificate'])->name('vaccinations.patient.certificate');
 });
+
+//inventory links
+Route::name("inventory_items.")->group(function(){
+    Route::prefix("inventory_items")->group(function(){        
+        Route::get('/',                      [InventoryItemController::class, 'index'      ])->name('index');
+        Route::get('/create',                [InventoryItemController::class, 'create'     ])->name('create');
+        Route::post('/',                     [InventoryItemController::class, 'store'      ])->name('store');
+        Route::get('/{id}',                  [InventoryItemController::class, 'show'       ])->name('show');
+        Route::get('/edit/{id}',             [InventoryItemController::class, 'edit'       ])->name('edit');
+        Route::post('/update/{id}',          [InventoryItemController::class, 'update'     ])->name('update');
+        Route::delete('/{id}/destroy',       [InventoryItemController::class, 'destroy'    ])->name('destroy');
+    });
+});
+
 
 require __DIR__.'/auth.php';
