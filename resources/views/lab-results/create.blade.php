@@ -16,16 +16,13 @@
         <div class="bg-white rounded-lg shadow p-6">
             <form method="POST" action="{{ route('lab-results.store') }}">
                 @csrf
-                @if($followUpTest)
-                    <input type="hidden" name="follow_up_id" value="{{ $followUpTest->id }}">
-                @endif
                 <input type="hidden" name="status" value="pending">
 
                 <div class="mb-4">
                     <label for="patient_id" class="block text-gray-700 text-sm font-bold mb-2">Patient</label>
                     <select name="patient_id" id="patient_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         @foreach($patients as $patient)
-                            <option value="{{ $patient->id }}" {{ $followUpTest && $followUpTest->patient_id == $patient->id ? 'selected' : '' }}>
+                            <option value="{{ $patient->id }}">
                                 {{ $patient->user->name }}
                             </option>
                         @endforeach
@@ -36,7 +33,7 @@
                     <label for="doctor_id" class="block text-gray-700 text-sm font-bold mb-2">Doctor</label>
                     <select name="doctor_id" id="doctor_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         @foreach($doctors as $doctor)
-                            <option value="{{ $doctor->id }}" {{ $followUpTest && $followUpTest->doctor_id == $doctor->id ? 'selected' : '' }}>
+                            <option value="{{ $doctor->id }}">
                                 {{ $doctor->user->name }}
                             </option>
                         @endforeach
@@ -47,7 +44,7 @@
                     <label for="lab_technician_id" class="block text-gray-700 text-sm font-bold mb-2">Lab Technician</label>
                     <select name="lab_technician_id" id="lab_technician_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         @foreach($labTechnicians as $technician)
-                            <option value="{{ $technician->id }}" {{ $followUpTest && $followUpTest->lab_technician_id == $technician->id ? 'selected' : '' }}>
+                            <option value="{{ $technician->id }}">
                                 {{ $technician->staff->user->name }}
                             </option>
                         @endforeach
@@ -56,12 +53,12 @@
 
                 <div class="mb-4">
                     <label for="test_name" class="block text-gray-700 text-sm font-bold mb-2">Test Name</label>
-                    <input type="text" name="test_name" id="test_name" value="{{ $followUpTest ? $followUpTest->test_name : old('test_name') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" name="test_name" id="test_name" value="{{ old('test_name') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
 
                 <div class="mb-4">
                     <label for="test_category" class="block text-gray-700 text-sm font-bold mb-2">Test Category</label>
-                    <input type="text" name="test_category" id="test_category" value="{{ $followUpTest ? $followUpTest->test_category : old('test_category') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" name="test_category" id="test_category" value="{{ old('test_category') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
 
                 <div class="mb-4">
@@ -76,7 +73,7 @@
 
                 <div class="mb-4">
                     <label for="test_date" class="block text-gray-700 text-sm font-bold mb-2">Test Date</label>
-                    <input type="date" name="test_date" id="test_date" value="{{ $followUpTest ? $followUpTest->test_date->format('Y-m-d') : old('test_date') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="date" name="test_date" id="test_date" value="{{ old('test_date') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
 
                 <div class="mb-4">
@@ -88,7 +85,7 @@
 
                 <div class="flex items-center justify-between">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        {{ $followUpTest ? 'Create Follow-up Result' : 'Create Lab Result' }}
+                        Create Lab Result
                     </button>
                 </div>
             </form>

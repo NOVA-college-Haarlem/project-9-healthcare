@@ -10,17 +10,18 @@ return new class extends Migration
     {
         Schema::create('lab_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
-            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
+            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+            $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
             $table->foreignId('lab_technician_id')->constrained('lab_technicians')->onDelete('cascade');
             $table->string('test_name');
             $table->string('test_category');
-            $table->date('test_date');
-            $table->string('status')->default('pending');
-            $table->text('doctor_notes')->nullable();
+            $table->text('result_value');
+            $table->text('reference_range')->nullable();
             $table->boolean('is_abnormal')->default(false);
-            $table->string('result_value')->nullable();
-            $table->string('reference_range')->nullable();
+            $table->text('doctor_notes')->nullable();
+            $table->text('interpretation')->nullable();
+            $table->enum('status', ['pending', 'completed', 'reviewed'])->default('pending');
+            $table->timestamp('test_date');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -59,8 +59,6 @@ Route::prefix('vaccinations')->group(function () {
 });
 
 Route::resource('lab-results', LabResultController::class);
-Route::post('lab-results/{labResult}/order-follow-up', [LabResultController::class, 'orderFollowUp'])->name('lab-results.order-follow-up');
-Route::get('lab-technician/dashboard', [LabResultController::class, 'technicianDashboard'])->name('lab-technician.dashboard');
 
 // require __DIR__.'/auth.php';
 
