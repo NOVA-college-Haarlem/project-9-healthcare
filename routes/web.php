@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VaccinationController;
+use App\Http\Controllers\LabResultController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +34,12 @@ Route::get('/appointments/date/{date}', [AppointmentController::class, 'getAppoi
 Route::post('/appointments/{appointment}/approve', [AppointmentController::class, 'approve'])->name('appointments.approve'); // Approve appointment
 Route::post('/appointments/{appointment}/reschedule', [AppointmentController::class, 'reschedule'])->name('appointments.reschedule'); // Reschedule appointment
 Route::post('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])->name('appointments.cancel'); // Cancel appointment
+
+
+
+
+
+
 # VACCINATIONS ROUTES
 Route::prefix('vaccinations')->group(function () {
     // Reminders
@@ -50,6 +57,10 @@ Route::prefix('vaccinations')->group(function () {
     Route::get('/patient/{patient}/schedule', [VaccinationController::class, 'upcomingVaccines'])->name('vaccinations.patient.schedule');
     Route::get('/patient/{patient}/certificate', [VaccinationController::class, 'showCertificate'])->name('vaccinations.patient.certificate');
 });
+
+Route::resource('lab-results', LabResultController::class);
+Route::post('lab-results/{labResult}/order-follow-up', [LabResultController::class, 'orderFollowUp'])->name('lab-results.order-follow-up');
+Route::get('lab-technician/dashboard', [LabResultController::class, 'technicianDashboard'])->name('lab-technician.dashboard');
 
 // require __DIR__.'/auth.php';
 
