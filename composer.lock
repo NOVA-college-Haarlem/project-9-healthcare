@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "d6c73ea5dadcd971050eeb806511e47d",
+=======
     "content-hash": "31f91bfac1ed178dbae6c12ac6c66a97",
+>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
     "packages": [
         {
             "name": "brick/math",
@@ -6172,6 +6176,8 @@
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
+<<<<<<< HEAD
+=======
             "name": "jean85/pretty-package-versions",
             "version": "2.1.1",
             "source": {
@@ -6232,6 +6238,7 @@
             "time": "2025-03-19T14:43:43+00:00"
         },
         {
+>>>>>>> 9d34e96279d375f00c4c2fe3a3b91f47593c3fb0
             "name": "laravel/breeze",
             "version": "v2.3.6",
             "source": {
@@ -9064,12 +9071,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
