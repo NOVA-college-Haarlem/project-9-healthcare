@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InventoryItem;
+use App\Models\SupplyRequest;
 use Illuminate\Http\Request;
 
 class InventoryItemController extends Controller
@@ -21,9 +22,11 @@ class InventoryItemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
+            'name'      => 'required|string|max:255',
+            'category'  => 'required|string|max:300',
+            'quantity'  => 'required|integer|min:0',
+            'location'  => 'required|string|max:300',
+            'threshold' => 'nullable|integer|min:0',
         ]);
         
         $inventoryItem = new InventoryItem();
@@ -31,6 +34,27 @@ class InventoryItemController extends Controller
         return redirect()->route('inventory_items.index');
     }
 
+    public function request()
+    {
+        $inventoryItems = InventoryItem::all();
+        return view('inventory_items.request', compact('inventoryItems'));
+    }
+
+    public function storeRequest(Request $request)
+    {
+        $request->validate([
+            'item_id'   => 'required|exists:inventory_items,id',
+            'quantity'  => 'required|integer|min:1',
+        ]);
+    
+        SupplyRequest::create([
+            'item_id'  => $request->item_id,
+            'quantity' => $request->quantity,
+            'status'   => 'pending', // Default status
+        ]);    
+        return redirect()->route('supplies.index')->with('success', 'Request submitted successfully!');
+    }
+    
     public function show(string $id)
     {
         $inventoryItem = InventoryItem::findOrFail($id);
@@ -69,8 +93,10 @@ class InventoryItemController extends Controller
     private function save($inventoryItem, Request $request)
     {
         $inventoryItem->name = $request->name;
+        $inventoryItem->category = $request->category;
         $inventoryItem->quantity = $request->quantity;
-        $inventoryItem->price = $request->price;
+        $inventoryItem->location = $request->location;
+        $inventoryItem->threshold = $request->threshold;
         $inventoryItem->save();
     }
 }

@@ -1,5 +1,14 @@
 <x-base>
     <h1>Create Inventory Item</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('inventory_items.store') }}" method="POST">
         @csrf
         <div class="form-group">

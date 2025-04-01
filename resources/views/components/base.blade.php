@@ -59,7 +59,7 @@
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Inventory</a>
                                 <ul class="dropdown-menu" aria-labelledby="inventoryDropdown">
                                     <li><a class="dropdown-item" href="/inventory_items">Inventory Items</a></li>
-                                    <li><a class="dropdown-item" href="/Supplies">Supplies</a></li>
+                                    <li><a class="dropdown-item" href="/supplies">Supply requests</a></li>
                                     <li><a class="dropdown-item" href="/inventory_managers">Inventory Managers</a></li>
                                 </ul>
                             </li>

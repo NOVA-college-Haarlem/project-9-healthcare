@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\InventoryItemController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplyRequestController;
 use App\Http\Controllers\VaccinationController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,13 +78,24 @@ Route::prefix('vaccinations')->group(function () {
 //inventory links
 Route::name("inventory_items.")->group(function(){
     Route::prefix("inventory_items")->group(function(){        
-        Route::get('/',                      [InventoryItemController::class, 'index'      ])->name('index');
-        Route::get('/create',                [InventoryItemController::class, 'create'     ])->name('create');
-        Route::post('/',                     [InventoryItemController::class, 'store'      ])->name('store');
-        Route::get('/{id}',                  [InventoryItemController::class, 'show'       ])->name('show');
-        Route::get('/edit/{id}',             [InventoryItemController::class, 'edit'       ])->name('edit');
-        Route::post('/update/{id}',          [InventoryItemController::class, 'update'     ])->name('update');
-        Route::delete('/{id}/destroy',       [InventoryItemController::class, 'destroy'    ])->name('destroy');
+        Route::get('/',                      [InventoryItemController::class, 'index'       ])->name('index');
+        Route::get('/create',                [InventoryItemController::class, 'create'      ])->name('create');
+        Route::post('/',                     [InventoryItemController::class, 'store'       ])->name('store');
+        Route::get('/request',               [InventoryItemController::class, 'request'     ])->name('request');
+        Route::post('/store_request',        [InventoryItemController::class, 'storeRequest'])->name('store_request');
+        Route::get('/{id}',                  [InventoryItemController::class, 'show'        ])->name('show');
+        Route::get('/edit/{id}',             [InventoryItemController::class, 'edit'        ])->name('edit');
+        Route::post('/update/{id}',          [InventoryItemController::class, 'update'      ])->name('update');
+        Route::delete('/{id}/destroy',       [InventoryItemController::class, 'destroy'     ])->name('destroy');
+    });
+});
+
+//inventory links
+Route::name("supplies.")->group(function(){
+    Route::prefix("supplies")->group(function(){        
+        Route::get('/',                      [SupplyRequestController::class, 'index'       ])->name('index');
+        Route::delete('/{id}/destroy',       [SupplyRequestController::class, 'destroy'     ])->name('destroy');
+        Route::delete('/{id}/approve',       [SupplyRequestController::class, 'approve'     ])->name('approve');
     });
 });
 
