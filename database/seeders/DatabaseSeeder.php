@@ -13,8 +13,18 @@ use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run(): void
+    /**
+     * Seed the application's database.
+     */  public function run(): void
     {
+
+
+        // User::factory(10)->create();
+
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
         $this->call([
             DepartmentSeeder::class,
             DoctorSeeder::class,
@@ -29,7 +39,13 @@ class DatabaseSeeder extends Seeder
         // Artsen aanmaken
 
 
-        // Patiënten met vaccinaties
+        $this->call([
+            PatientSeeder::class,
+            DepartmentSeeder::class,
+            VaccinationSeeder::class,
+            ScheduleSeeder::class,
+            DoctorSeeder::class,
+        ]);
 
         // Aanvullende testpatiënten zonder vaccinaties
         for ($i = 1; $i <= 10; $i++) {
