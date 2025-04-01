@@ -70,15 +70,11 @@
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Filter by Result</label>
+                <div class="md:col-span-4 flex items-center space-x-4">
                     <div class="flex items-center">
                         <input type="checkbox" name="is_abnormal" value="1" {{ request('is_abnormal') ? 'checked' : '' }} class="form-checkbox h-4 w-4 text-blue-600">
                         <span class="ml-2 text-gray-700">Show only abnormal results</span>
                     </div>
-                </div>
-
-                <div class="md:col-span-4 flex justify-end mt-[-40px]">
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Apply Filters
                     </button>
