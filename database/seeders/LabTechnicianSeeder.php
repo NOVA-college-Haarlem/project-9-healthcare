@@ -59,7 +59,10 @@ class LabTechnicianSeeder extends Seeder
 
             $department = Department::firstOrCreate(
                 ['name' => $technicianData['department']],
-                ['location' => 'Begane grond, achter']
+                [
+                    'location' => 'Begane grond, achter',
+                    'work_days' => 'Monday - Friday' // Add a default value for work_days
+                ]
             );
 
             $staff = Staff::firstOrCreate(
