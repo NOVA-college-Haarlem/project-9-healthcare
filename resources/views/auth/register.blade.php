@@ -1,4 +1,4 @@
-<!-- filepath: c:\Users\manos\Herd\project-9-healthcare\resources\views\auth\register.blade.php -->
+
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf

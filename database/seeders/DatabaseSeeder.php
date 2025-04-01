@@ -17,37 +17,8 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */  public function run(): void
     {
-
-
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        $this->call([
-            DepartmentSeeder::class,
-            DoctorSeeder::class,
-            PatientSeeder::class,
-            AppointmentStatusSeeder::class,
-            AppointmentSeeder::class,
-            LabTechnicianSeeder::class,
-        ]);
-        // Eerst departments aanmaken
-
-
-        // Artsen aanmaken
-
-
-        $this->call([
-            PatientSeeder::class,
-            DepartmentSeeder::class,
-            VaccinationSeeder::class,
-            ScheduleSeeder::class,
-            DoctorSeeder::class,
-        ]);
-
-        // Aanvullende testpatiënten zonder vaccinaties
+       
+         // Aanvullende testpatiënten zonder vaccinaties
         for ($i = 1; $i <= 10; $i++) {
             $user = User::firstOrCreate(
                 ['email' => 'patient' . $i . '@example.com'],
@@ -70,5 +41,21 @@ class DatabaseSeeder extends Seeder
                 ]
             );
         }
+
+        $this->call([
+            DepartmentSeeder::class,
+            DoctorSeeder::class,
+            PatientSeeder::class,
+            VaccinationSeeder::class,
+            AppointmentStatusSeeder::class,
+            AppointmentSeeder::class,
+          InventorySeeder::class,
+            ScheduleSeeder::class,
+
+            LabTechnicianSeeder::class,
+        ]);
+
+
+     
     }
 }

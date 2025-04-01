@@ -11,12 +11,12 @@ class Schedule extends Model
         'date',
         'start_time',
         'end_time',
-        'staff_id'
+        'doctor_id',
     ];
 
-    public function staff()
+    public function doctor()
     {
-        return $this->belongsTo(Staff::class);
+        return $this->belongsTo(Doctor::class);
     }
 
     public function department()
@@ -24,6 +24,8 @@ class Schedule extends Model
         return $this->belongsTo(Department::class);
 
     }
+
+
     public function isAvailable($startTime, $endTime)
     {
         return !$this->where('start_time', '<=', $endTime)
