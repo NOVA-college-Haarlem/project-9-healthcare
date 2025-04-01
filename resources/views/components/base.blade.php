@@ -42,6 +42,7 @@
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Doctors</a>
                                 <ul class="dropdown-menu" aria-labelledby="doctorsDropdown">
                                     <li><a class="dropdown-item" href="/doctors">Doctors</a></li>
+                                    <li><a class="dropdown-item" href="/schedules">Schedule</a></li>
                                     <li><a class="dropdown-item" href="/appointments">Appointments</a></li>
                                     <li><a class="dropdown-item" href="/medical_records">Medical Records</a></li>
                                 </ul>
@@ -58,6 +59,7 @@
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Inventory</a>
                                 <ul class="dropdown-menu" aria-labelledby="inventoryDropdown">
                                     <li><a class="dropdown-item" href="/inventory_items">Inventory Items</a></li>
+                                    <li><a class="dropdown-item" href="/Supplies">Supplies</a></li>
                                     <li><a class="dropdown-item" href="/inventory_managers">Inventory Managers</a></li>
                                 </ul>
                             </li>

@@ -47,15 +47,18 @@ class InventoryItemController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
             'quantity' => 'required|integer|min:0',
-            'price' => 'required|numeric|min:0',
+            'location' => 'required|string|max:255',
+            'threshold' => 'required|integer|min:0',
         ]);
-        
+    
         $inventoryItem = InventoryItem::findOrFail($id);
-        $this->save($inventoryItem, $request);
+        $inventoryItem->update($request->only(['name', 'category', 'quantity', 'location', 'threshold']));
+        
         return redirect()->route('inventory_items.index');
     }
-
+    
     public function destroy(string $id)
     {
         $inventoryItem = InventoryItem::findOrFail($id);
