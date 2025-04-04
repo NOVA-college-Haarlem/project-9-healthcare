@@ -14,16 +14,23 @@ class AppointmentController extends Controller
     // View all appointments (for simplicity, show all appointments)
     public function index(Request $request)
     {
-        $patients = Patient::all(); // Fetch all patients for the dropdown
+        $patients = Patient::all();
+        $doctors = Doctor::all(); 
+    
         $query = Appointment::query();
-
+    
         if ($request->has('patient_id') && $request->patient_id) {
             $query->where('patient_id', $request->patient_id);
         }
-
+    
+        if ($request->has('doctor_id') && $request->doctor_id) {
+            $query->where('doctor_id', $request->doctor_id);
+        }
+    
         $appointments = $query->get(); // Fetch filtered appointments
-        return view('appointments.index', compact('appointments', 'patients'));
+        return view('appointments.index', compact('appointments', 'patients', 'doctors'));
     }
+    
 
     // Show the form to create a new appointment
     public function create()

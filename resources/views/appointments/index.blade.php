@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,25 +81,36 @@
 <br>
 <br>
 <br>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <form method="GET" action="{{ route('appointments.index') }}" style="margin: 0;">
-                <label for="patient_id">Filter by Patient:</label>
-                <select name="patient_id" id="patient_id" onchange="this.form.submit()">
-                    <option value="">All Patients</option>
-                    @foreach ($patients as $patient)
-                        <option value="{{ $patient->id }}" {{ request('patient_id') == $patient->id ? 'selected' : '' }}>
-                            {{ $patient->user->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <form method="GET" action="{{ route('appointments.index') }}" style="margin: 0; display: flex; align-items: center; gap: 10px;">
+        <label for="patient_id">Filter by Patient:</label>
+        <select name="patient_id" id="patient_id" onchange="this.form.submit()">
+            <option value="">All Patients</option>
+            @foreach ($patients as $patient)
+                <option value="{{ $patient->id }}" {{ request('patient_id') == $patient->id ? 'selected' : '' }}>
+                    {{ $patient->user->name }}
+                </option>
+            @endforeach
+        </select>
+        
+        <label for="doctor_id">Filter by Doctor:</label>
+        <select name="doctor_id" id="doctor_id" onchange="this.form.submit()">
+            <option value="">All Doctors</option>
+            @foreach ($doctors as $doctor)
+                <option value="{{ $doctor->id }}" {{ request('doctor_id') == $doctor->id ? 'selected' : '' }}>
+                    {{ $doctor->user->name }}
+                </option>
+            @endforeach
+        </select>
+    </form>
 
-            <a href="{{ route('appointments.create') }}" style="text-decoration: none;">
-                <button type="button" style="background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">
-                    Create Appointment
-                </button>
-            </a>
-        </div>
+    <a href="{{ route('appointments.create') }}" style="text-decoration: none;">
+        <button type="button" style="background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s;">
+            Create Appointment
+        </button>
+    </a>
+</div>
+
 
         <table>
             <thead>

@@ -1,7 +1,8 @@
 <x-base>
     <h1>Welcome to the Inventory!</h1>
     <a href="{{ route('inventory_items.create') }}" class="btn btn-primary" style="width:100px; margin-left:40px; margin-bottom:20px;">Create</a>
-    
+    <a href="{{ route('inventory_items.request') }}" class="btn btn-primary" style="width:250px; margin-left:40px; margin-bottom:20px;"> Request supply restocking</a>
+
     <div class="mb-2">
         <div class="row">
             <div class="filter-container">
@@ -54,18 +55,6 @@
 </x-base>
 
 <script>
-
-        // Search function
-        // // searchvalue is de naam in de searchbar, en de function zoekt deze op in tussen alle namen in de
-        // searchInput.addEventListener("input", function() {
-        //     const searchValue = this.value.toLowerCase();
-        //     kidRows.forEach(row => {
-        //         const name = row.querySelector(".kid-name").textContent.toLowerCase();
-        //         row.style.display = name.includes(searchValue) ? "" : "none";
-        //     });
-        // });
-
-        // Filter function, by category
         document.addEventListener("DOMContentLoaded", function() {
         const catFilter = document.getElementById("catFilter");    
         const itemTable = document.getElementById("itemTable");
@@ -84,5 +73,4 @@
     function confirmDelete() {
         return confirm('Are you sure you want to delete this product? This action cannot be undone.');
     }
-
 </script>

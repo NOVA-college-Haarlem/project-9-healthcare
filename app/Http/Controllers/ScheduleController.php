@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Models\Department;
 use App\Http\Requests\ScheduleRequest;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -15,7 +16,14 @@ class ScheduleController extends Controller
         $departments = Department::all();
         return view('schedules.index', compact('schedules', 'departments'));
     }
-
+    public function shifts()
+    {
+        $schedules = Schedule::with('doctor')->whereNotNull('doctor_id')->get();
+        $doctors = Doctor::all();
+        dd($schedules);
+        return view('schedules.shifts', compact('schedules', 'doctors'));
+    }
+    
     public function create()
     {
         $departments = Department::all();

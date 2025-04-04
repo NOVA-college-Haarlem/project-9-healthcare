@@ -3482,7 +3482,7 @@ textarea.form-control-lg {
 }
 
 .home-button {
-  background-color: #2da1ff;
+  background-color: #4f565c;
   color: white;
   font-size: 40px;
   padding: 15px 30px;
@@ -3745,7 +3745,7 @@ textarea.form-control-lg {
   --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-link-color);
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
-  --bs-nav-link-disabled-color: #6c757d;
+  --bs-nav-link-disabled-color: #1a94ff;
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;

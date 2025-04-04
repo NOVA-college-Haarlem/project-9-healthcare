@@ -18,21 +18,25 @@
         </thead>
 
         <tbody>
-            @foreach ($schedules as $schedule)
-                <tr>
-                    <td>{{ $schedule->department->name}}</td>
-                    <td>{{ $schedule->department->work_days}}</td>
-                    <td>{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
-                    <td>
-                        <a href="schedules/{{$schedule->id}}">show more</a>
-                        <a href="schedules/edit/{{$schedule->id}}/">edit</a>
-                        <form action="schedules/{{$schedule->id}}/destroy" method="POST">
+            @foreach ($schedules->whereNotNull('department_id') as $schedule)
+            <tr>
+                <td>{{ $schedule->department->name }}</td>
+                <td>{{ $schedule->department->work_days }}</td>
+                <td>{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
+                <td style="width: 30px">
+                    <div style="display: flex; justify-content: space-between; gap: 15px;">
+                        <a href="schedules/{{$schedule->id}}" class="btn btn-info btn-sm" style="width: 150px;">Show More</a>
+                        <a href="schedules/edit/{{$schedule->id}}" class="btn btn-success btn-sm" style="width: 150px;">Edit</a>
+                        <form action="schedules/{{$schedule->id}}/destroy" method="POST" style="display: inline;" onsubmit="return confirmDelete();">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-link">delete</button>
-                    </td>
-                </tr>
-            @endforeach
+                            <button type="submit" class="btn btn-danger btn-sm" style="width: 150px;">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+        
         </tbody>
     </table>
 </div>
