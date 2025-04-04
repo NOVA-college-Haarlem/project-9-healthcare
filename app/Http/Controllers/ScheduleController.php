@@ -16,13 +16,15 @@ class ScheduleController extends Controller
         $departments = Department::all();
         return view('schedules.index', compact('schedules', 'departments'));
     }
+    
     public function shifts()
     {
-        $schedules = Schedule::with('doctor')->whereNotNull('doctor_id')->get();
-        $doctors = Doctor::all();
-        dd($schedules);
+        $schedules = Schedule::with('doctor.user')->whereNotNull('doctor_id')->get();
+        $doctors = Doctor::with('user')->whereIn('id', $schedules->pluck('doctor_id'))->get();
+        
         return view('schedules.shifts', compact('schedules', 'doctors'));
     }
+    
     
     public function create()
     {

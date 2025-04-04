@@ -18,7 +18,7 @@
         <li><a href="{{ route('vaccinations.create') }}">Create Vaccination</a></li>
         <li><a href="{{ route('lab-results.index') }}">Lab Results</a></li>
         <li><a href="{{ route('inventory_items.index') }}">Inventory Items</a></li>
-        <li><a href="{{ route('supplies.index') }}">Supplies</a></li>
+        <li><a href="{{ route('supplies.index') }}">Supply requests</a></li>
     </ul>
 </body>
 </html>

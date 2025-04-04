@@ -9,7 +9,8 @@
                 <option value="all">All Doctors</option>
                 @foreach ($schedules->whereNotNull('doctor_id')->unique('doctor_id') as $schedule)
                     @if ($schedule->doctor)
-                        <option value="{{ $schedule->doctor->id }}">{{ $schedule->doctor->name }}</option>
+                    <option value="{{ $schedule->doctor->id }}">{{ $schedule->doctor->user->name }}</option>
+
                 @endif
             @endforeach
             
